@@ -7,7 +7,8 @@
     "prebuild": "rm -rf ./build",
     "start": "node ./build/src",
     "build": "tsc",
-    "dev": "tsc-watch --onSuccess \"ts-node ./src\""
+    "dev": "tsc-watch --onSuccess \"ts-node ./src\"",
+    "seedDev": "ts-node ./src/seeds"
   },
   "author": "",
   "license": "ISC",

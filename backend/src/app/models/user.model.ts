@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { Schema, model } from "mongoose";
 import { IUserDocument, IUserModel, UserGroup } from "../../types";
 import _ from "lodash";
+import config from "../../../config";
 
 const UserSchema: Schema<IUserDocument> = new Schema(
   {
@@ -13,7 +14,8 @@ const UserSchema: Schema<IUserDocument> = new Schema(
       required: false,
       trim: true,
       select: false,
-      set: (val: string) => (val ? bcrypt.hashSync(val, 10) : val),
+      set: (val: string) =>
+        val ? bcrypt.hashSync(val, Number(config.PASSWORD_SALT)) : val,
     },
   },
   {
