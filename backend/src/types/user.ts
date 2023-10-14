@@ -1,23 +1,26 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Model } from "mongoose";
 
 export interface IUserRequest {
-  _id: mongoose.Types.ObjectId;
-  group: IUserGroup;
-
+  _id: mongoose.Types.ObjectId | string;
+  group: UserGroup;
 }
 
 export interface IUser {
   _id: mongoose.Types.ObjectId;
-  group: IUserGroup;
   email: string;
-  firstName: string;
-  lastName: string;
+  name: string;
+  group: UserGroup;
   password: string;
 }
 
-export enum IUserGroup {
+export enum UserGroup {
   HR = "HR",
   EMPLOYEE = "EMPLOYEE",
 }
 
 export interface IUserDocument extends Omit<IUser, "_id">, Document {}
+
+export interface IUserModel extends Model<IUserDocument> {
+  logIn(email: string, password: string): Promise<IUserRequest | undefined>;
+  auth(id: string): Promise<IUserRequest>;
+}
