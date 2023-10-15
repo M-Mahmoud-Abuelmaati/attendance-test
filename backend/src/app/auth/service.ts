@@ -14,7 +14,7 @@ class AuthService {
 
   private static getAccessToken(user: IUserRequest) {
     const accessToken = JWT.sign(
-      { _id: user._id },
+      { _id: user._id, name: user.name, group: user.group },
       config.ACCESS_TOKEN_SECRET,
       {
         expiresIn: `7d`,

@@ -3,6 +3,7 @@ import mongoose, { Document, Model } from "mongoose";
 export interface IUserRequest {
   _id: mongoose.Types.ObjectId | string;
   group: UserGroup;
+  name: string;
 }
 
 export interface IUser {

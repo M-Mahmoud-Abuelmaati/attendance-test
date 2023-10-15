@@ -14,7 +14,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       .json({ message: "User not authorized" });
   } else {
     try {
-      const { _id, group } = jwt.verify(
+      const { _id, group, name } = jwt.verify(
         token,
         config.ACCESS_TOKEN_SECRET
       ) as IUserRequest;
@@ -29,7 +29,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
           .status(httpStatus.UNAUTHORIZED)
           .json({ message: "User is not authorized" });
 
-      req.user = { _id, group };
+      req.user = { _id, name, group };
       next();
     } catch (err: any) {
       console.log(err);
