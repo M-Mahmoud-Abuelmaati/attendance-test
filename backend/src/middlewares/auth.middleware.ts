@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import { httpStatus } from "../constants";
-import { User } from "../app/models";
 import jwt from "jsonwebtoken";
 import config from "../../config";
 import { IUserRequest, UserGroup } from "../types";
@@ -15,24 +14,22 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       .json({ message: "User not authorized" });
   } else {
     try {
-      const { _id } = jwt.verify(
+      const { _id, group } = jwt.verify(
         token,
         config.ACCESS_TOKEN_SECRET
       ) as IUserRequest;
 
-      const user = await User.auth(_id as string);
-
-      if (!user)
+      if (!_id && !group)
         return res
           .status(httpStatus.UNAUTHORIZED)
           .json({ message: "Invalid Access Token" });
 
-      if (user.group === UserGroup.EMPLOYEE)
+      if (group === UserGroup.EMPLOYEE)
         return res
           .status(httpStatus.UNAUTHORIZED)
           .json({ message: "User is not authorized" });
 
-      req.user = user;
+      req.user = { _id, group };
       next();
     } catch (err: any) {
       console.log(err);
