@@ -10,7 +10,7 @@ export default {
   ) {
     const { body: data } = req;
     const result = await AuthService.login(data);
-    if (result.data?.accessToken) res.status(httpStatus.OK).json(result);
-    else res.status(httpStatus.BAD_REQUEST).json(result)
+    if (result.accessToken) res.status(httpStatus.OK).json(result);
+    else res.status(httpStatus.BAD_REQUEST).json(result);
   },
 };

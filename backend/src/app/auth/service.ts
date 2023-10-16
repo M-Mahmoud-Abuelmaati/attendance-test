@@ -9,7 +9,7 @@ class AuthService {
     const user = await User.logIn(data.email, data.password);
     if (!user) throw errors.Invalid_Credentials;
     if (user.group === UserGroup.EMPLOYEE) throw errors.Not_Authorized;
-    return { data: this.getAccessToken(user) };
+    return this.getAccessToken(user);
   }
 
   private static getAccessToken(user: IUserRequest) {
