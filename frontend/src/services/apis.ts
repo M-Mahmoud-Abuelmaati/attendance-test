@@ -1,5 +1,5 @@
 export default {
-  login: "/login",
+  login: "/auth/login",
   users: "/users",
   attendance: "/attendance",
 };

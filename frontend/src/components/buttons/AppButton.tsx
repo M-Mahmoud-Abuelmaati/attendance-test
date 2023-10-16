@@ -6,7 +6,12 @@ interface AppButtonProps {
 }
 const AppButton = ({ type, title, loading, onClick }: AppButtonProps) => {
   return (
-    <button type={type} onClick={onClick} disabled={loading}>
+    <button
+      className="bg-blue-800 w-full p-2 rounded-md text-white"
+      type={type}
+      onClick={onClick}
+      disabled={loading}
+    >
       {title}
     </button>
   );

@@ -2,21 +2,19 @@ import { useFormik } from "formik";
 import InputField from "../components/inputs/InputField";
 import { useUser } from "../contexts/user";
 import AppButton from "../components/buttons/AppButton";
-import Joi from "joi";
+import * as Yup from "yup";
 
 interface LoginProps {}
 
 const Login = ({}: LoginProps) => {
   const { signIn } = useUser();
 
-  const validationSchema = Joi.object({
-    email: Joi.string()
-      .email({ tlds: { allow: false } })
-      .required(),
-    password: Joi.string().min(8).required(),
+  const validationSchema = Yup.object({
+    email: Yup.string().email().required(),
+    password: Yup.string().min(8).required(),
   });
 
-  const { values, errors, setFieldValue, handleSubmit } = useFormik({
+  const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues: {
       email: "",
       password: "",
@@ -27,28 +25,27 @@ const Login = ({}: LoginProps) => {
     },
   });
 
-  console.log(errors);
-
   return (
     <div className="flex flex-col h-full w-full justify-center items-center">
       <form
-        className="p-2 rounded shadow-md bg-white flex flex-col gap-5 items-center justify-center"
+        className="py-4 px-6 rounded shadow-md bg-white flex flex-col gap-8 items-center justify-center"
         onSubmit={handleSubmit}
       >
-        <h1>Login</h1>
+        <h1 className="font-bold text-2xl">Login</h1>
         <InputField
-          type="email"
+          type="text"
           name="email"
           placeholder="Email"
           value={values.email}
-          handleChange={(e) => setFieldValue("email", e.target.value)}
+          handleChange={handleChange}
           error={errors.email}
         />
         <InputField
+          type="text"
           name="password"
           placeholder="Password"
           value={values.password}
-          handleChange={(e) => setFieldValue("password", e.target.value)}
+          handleChange={handleChange}
           error={errors.password}
         />
         <AppButton title="Sign In" type="submit" />

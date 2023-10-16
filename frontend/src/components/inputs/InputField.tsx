@@ -25,7 +25,7 @@ const InputField = ({
         value={value}
         onChange={handleChange}
       />
-      {error && <span className="text-red-500">{error}</span>}
+      {error && <span className="text-red-500 text-sm">{error}</span>}
     </div>
   );
 };

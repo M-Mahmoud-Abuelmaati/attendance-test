@@ -30,6 +30,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
         name: string;
         group: UserGroup;
       };
+      console.log(token);
       setUser({ _id, group, name });
       _setToken(token);
     } else {
@@ -64,7 +65,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [getUser]);
 
   return (
     <UserContext.Provider value={{ isAuthenticated, user, loading, signIn }}>
