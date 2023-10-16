@@ -97,13 +97,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/user",
+							"raw": "{{HOST}}/api/users",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"api",
-								"user"
+								"users"
 							]
 						}
 					},
@@ -116,7 +116,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    // ِOptional\r\n    \"name\": \"{{$randomFullName}}\",\r\n    \"email\": \"{{$randomEmail}}\"\r\n}",
+							"raw": "{\r\n    // ِOptional\r\n    \"name\": \"{{$randomFullName}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"group\": \"HR\", // HR, Employee\r\n    \"password\": \"123123123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -124,13 +124,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/user/:id",
+							"raw": "{{HOST}}/api/users/:id",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"api",
-								"user",
+								"users",
 								":id"
 							],
 							"variable": [
@@ -149,13 +149,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/user/:id",
+							"raw": "{{HOST}}/api/users/:id",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"api",
-								"user",
+								"users",
 								":id"
 							],
 							"variable": [
@@ -186,13 +186,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/user",
+							"raw": "{{HOST}}/api/users",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"api",
-								"user"
+								"users"
 							],
 							"query": [
 								{
@@ -212,19 +212,19 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/user/:id",
+							"raw": "{{HOST}}/api/users/:id",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"api",
-								"user",
+								"users",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "652a75e766bb32017a068016"
+									"value": ""
 								}
 							]
 						}
@@ -251,13 +251,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/attendance",
+							"raw": "{{HOST}}/api/attendants",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"api",
-								"attendance"
+								"attendants"
 							]
 						}
 					},
@@ -269,13 +269,13 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/attendance/:id",
+							"raw": "{{HOST}}/api/attendants/:id",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"api",
-								"attendance",
+								"attendants",
 								":id"
 							],
 							"variable": [
@@ -294,13 +294,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/attendance/:id",
+							"raw": "{{HOST}}/api/attendants/:id",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"api",
-								"attendance",
+								"attendants",
 								":id"
 							],
 							"variable": [
@@ -319,19 +319,20 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/attendance/?employee=652a75e766bb32017a068016",
+							"raw": "{{HOST}}/api/attendants/",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"api",
-								"attendance",
+								"attendants",
 								""
 							],
 							"query": [
 								{
 									"key": "employee",
-									"value": "652a75e766bb32017a068016"
+									"value": "652a75e766bb32017a068016",
+									"disabled": true
 								}
 							]
 						}
@@ -344,13 +345,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/attendance/:id",
+							"raw": "{{HOST}}/api/attendants/:id",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"api",
-								"attendance",
+								"attendants",
 								":id"
 							],
 							"variable": [
