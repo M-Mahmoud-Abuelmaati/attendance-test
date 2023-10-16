@@ -24,6 +24,12 @@ const update = Joi.object({
   body: {
     name: Joi.string(),
     email: Joi.string().email(),
+    group: Enum(UserGroup),
+    password: Joi.alternatives().conditional("group", {
+      is: UserGroup.EMPLOYEE,
+      then: Joi.forbidden(),
+      otherwise: Joi.string().min(8),
+    }),
   },
 });
 

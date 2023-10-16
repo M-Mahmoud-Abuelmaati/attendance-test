@@ -14,21 +14,26 @@ const Login = ({}: LoginProps) => {
     password: Yup.string().min(8).required(),
   });
 
-  const { values, errors, handleChange, handleSubmit } = useFormik({
+  const { values, errors, handleChange, handleSubmit, setErrors } = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     validationSchema,
     onSubmit: (values) => {
-      signIn!(values);
+      signIn!(values)
+        .catch((error) =>
+          setErrors({
+            password: error?.response?.data?.message,
+          })
+        );
     },
   });
 
   return (
     <div className="flex flex-col h-full w-full justify-center items-center">
       <form
-        className="py-4 px-6 rounded shadow-md bg-white flex flex-col gap-8 items-center justify-center"
+        className="py-4 px-6 w-96 rounded shadow-md bg-white flex flex-col gap-8 items-center justify-center"
         onSubmit={handleSubmit}
       >
         <h1 className="font-bold text-2xl">Login</h1>
@@ -41,7 +46,7 @@ const Login = ({}: LoginProps) => {
           error={errors.email}
         />
         <InputField
-          type="text"
+          type="password"
           name="password"
           placeholder="Password"
           value={values.password}

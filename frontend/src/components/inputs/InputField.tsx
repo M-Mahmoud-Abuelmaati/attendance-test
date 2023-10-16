@@ -15,10 +15,10 @@ const InputField = ({
   handleChange,
 }: InputFieldProps) => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 w-full">
       <input
         type={type}
-        className="border border-black p-1 rounded-md indent-2"
+        className="border border-gray-300 p-2.5 rounded-md indent-2"
         id={name}
         name={name}
         placeholder={placeholder}

@@ -13,6 +13,9 @@ import ProtectedRoutes from "./pages/ProtectedRoutes";
 import UnProtectedRoutes from "./pages/UnProtectedRoutes ";
 import UserProfile from "./pages/UserProfile";
 import RootLayout from "./layouts/RootLayout";
+import UserAdd from "./pages/UserAdd";
+import UserEdit from "./pages/UserEdit";
+import AttendanceAdd from "./pages/AttendanceAdd";
 
 const availableRoutes = [
   {
@@ -24,7 +27,7 @@ const availableRoutes = [
     ),
   },
   {
-    path: "/login",
+    path: "/auth/login",
     component: (
       <UnProtectedRoutes>
         <Login />
@@ -36,6 +39,30 @@ const availableRoutes = [
     component: (
       <ProtectedRoutes>
         <UserProfile />
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    path: "/users/add",
+    component: (
+      <ProtectedRoutes>
+        <UserAdd />
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    path: "/users/:id/edit",
+    component: (
+      <ProtectedRoutes>
+        <UserEdit />
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    path: "/users/:id/attendance/add",
+    component: (
+      <ProtectedRoutes>
+        <AttendanceAdd />
       </ProtectedRoutes>
     ),
   },

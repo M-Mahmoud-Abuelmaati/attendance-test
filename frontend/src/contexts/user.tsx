@@ -20,22 +20,21 @@ const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<Partial<IUser> | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const isAuthenticated = useMemo(() => !!user?._id, [user?._id]);
-
   const getUser = useCallback(() => {
     const token = _getToken();
+    setLoading(true);
     if (token) {
       const { _id, group, name } = jwtDecode(token) as {
         _id: string;
         name: string;
         group: UserGroup;
       };
-      console.log(token);
       setUser({ _id, group, name });
       _setToken(token);
     } else {
       _removeToken();
     }
+    setLoading(false);
   }, []);
 
   const signIn = useCallback(
@@ -45,7 +44,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
         const response = await axiosInstance.post(apis.login, payload);
         _setToken(response.data?.accessToken);
       } catch (error) {
-        console.log(error);
+        throw error;
       } finally {
         setLoading(false);
       }
@@ -55,7 +54,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
   const _getToken = () => Cookies.get("token");
   const _setToken = (token: string) => {
-    axiosInstance.defaults.headers.common.Authorization = token;
+    axiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
     Cookies.set("token", token);
   };
   const _removeToken = () => {
@@ -65,10 +64,17 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
   useEffect(() => {
     getUser();
-  }, [getUser]);
+  }, []);
 
   return (
-    <UserContext.Provider value={{ isAuthenticated, user, loading, signIn }}>
+    <UserContext.Provider
+      value={{
+        isAuthenticated: useMemo(() => !!_getToken(), [_getToken]),
+        user,
+        loading,
+        signIn,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
